@@ -62,7 +62,26 @@ cudaDeviceSynchronize();
 // build-in param for block ID and thread ID
 blockIdx.x;
 threadIdx.x;
+
+// build-in param for grid dim and block dim
+gridDim.x // the number of blocks set
+blockDim.x // the number of threads per block set
+
+// memory allocation for both CPU and GPU
+int *a;
+cudaMallocManaged(&a, size);
+cudaFree(a);
+
+// run time error detection
+cudaError_t syncErr, asyncErr;
+syncErr = cudaGetLastError();
+asyncErr = cudaDeviceSynchronize();
+
+if (syncErr != cudaSuccess) printf("Error: %s\n", cudaGetErrorString(syncErr));
+if (asyncErr != cudaSuccess) printf("Error: %s\n", cudaGetErrorString(asyncErr));
 ```
 
  
+
+
 
