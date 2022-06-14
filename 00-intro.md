@@ -79,6 +79,16 @@ asyncErr = cudaDeviceSynchronize();
 
 if (syncErr != cudaSuccess) printf("Error: %s\n", cudaGetErrorString(syncErr));
 if (asyncErr != cudaSuccess) printf("Error: %s\n", cudaGetErrorString(asyncErr));
+
+// Or one could use the fucntion below to detect each CUDA operation
+inline cudaError_t checkCuda(cudaError_t result)
+{
+  if (result != cudaSuccess) {
+    fprintf(stderr, "CUDA Runtime Error: %s\n", cudaGetErrorString(result));
+    assert(result == cudaSuccess);
+  }
+  return result;
+}
 ```
 
  

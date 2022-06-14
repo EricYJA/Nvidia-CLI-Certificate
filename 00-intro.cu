@@ -15,9 +15,6 @@ void loop() {
   printf("%d\n", i);
 }
 
-__global__ 
-void 
-
 int main() {
   helloGPU<<<1, 1>>>();
   cudaDeviceSynchronize();
